@@ -103,7 +103,7 @@ class BookController extends Controller
         $validator = validator::make($request->all(),
         [
             'name'=>'required|max:100|min:3',
-            'desc'=>'required|max:3000|min:3',
+            'desc'=>'required|max:20000|min:3',
             'image'=>'image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
@@ -121,6 +121,7 @@ class BookController extends Controller
         $_name=$request->name;
         $_desc=$request->desc;
         
+        
         //select
         $book=Book::find($id);
         $book->name=$_name;
@@ -137,7 +138,7 @@ class BookController extends Controller
             $destinationPath = public_path('/images');
             
             $image->move($destinationPath, $name);
-            $imagePath='images/'.$name;
+            $imagePath='images'.$name;
             if(isset($book->image))
             // unlink($book->image);
             $book->image=$imagePath;

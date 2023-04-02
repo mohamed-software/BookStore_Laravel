@@ -14,6 +14,9 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route::get('/home',['home']);
+    
+
 //yes admins no users
 Route::middleware('isadmin')->group(function(){
 
@@ -44,14 +47,16 @@ Route::middleware('isloggedin')->group(function(){
 });
 
 
-
-
 //registration
 Route::get('users/register',[UserController::class,'register']);
 Route::post('users/save',[UserController::class,'save']);
 //Login
 Route::get('users/login',[UserController::class,'login']);
 Route::post('users/handleLogin',[UserController::class,'handleLogin']);
+//home
+Route::get('/home',function(){
+    return view('home');
+});
 
 //not auth route 
 Route::get('/notauth',function(){

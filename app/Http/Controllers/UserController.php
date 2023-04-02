@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class UserController extends Controller
 {
+    
     //register
     function register()
     {
