@@ -15,20 +15,21 @@
 @foreach($books as $book)
 <div class="col-s-6 col-md-4">
 <div class="card mb-5" style="width: 18rem;">
-<img src="{{asset($book->image)}}" class="card-img-top"  >
+<img src="{{'http://127.0.0.1/bookstore/public/'.$book->image}}" height="250px" >
 <div class="card-body">
-<small>{{asset($book->image)}}</small> 
 <h4>{{$book->name}}</h4> 
 
-
+<a href="{{url('books/show',$book->id)}}" class="btn btn-primary">Click to read</a>
 </div>
-    
-    <a href="{{url('books/show',$book->id)}}" class="btn btn-primary">Click to read</a><br>
+
+<div class="card-body">
     @if(Auth::user()->is_admin==1)
 <a  class="btn btn-primary" href="{{url('books/edit',$book->id)}}">Edit</a>
 <a  class="btn btn-danger " href="{{url('books/delete',$book->id)}}">Delete</a>
-</div>
 @endif
+</div>
+
+</div>
     </div>    
     @endforeach
     </div>

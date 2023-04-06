@@ -52,7 +52,7 @@ class BookController extends Controller
         $validator = validator::make($request->all(),
         [
         'name'=>'required|max:100|min:3',
-        'desc'=>'required|max:2000|min:3',
+        'desc'=>'required|max:20000|min:3',
         'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
@@ -64,15 +64,13 @@ class BookController extends Controller
         }
          //end validator//
 
-        //process image
         
+        //process image
         if ($request->hasFile('image'))
         {
             $image = $request->file('image');
             $name  = time().Str::random(30).Str::random(15).'.'.$image->getClientOriginalExtension();
-
             $destinationPath = public_path('/images');
-            
             $image->move($destinationPath, $name);
             $imagePath='images/'.$name;
         }
@@ -104,7 +102,7 @@ class BookController extends Controller
         [
             'name'=>'required|max:100|min:3',
             'desc'=>'required|max:20000|min:3',
-            'image'=>'image|mimes:jpeg,png,jpg,gif,svg'
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         //if validator  
@@ -138,7 +136,7 @@ class BookController extends Controller
             $destinationPath = public_path('/images');
             
             $image->move($destinationPath, $name);
-            $imagePath='images'.$name;
+            $imagePath='images/'.$name;
             if(isset($book->image))
             // unlink($book->image);
             $book->image=$imagePath;
